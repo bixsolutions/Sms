@@ -8,8 +8,6 @@
   <ListPreference
     android:key="Organization"
     android:defaultValue="ASH"
-    android:entries="@array/organizations"
-    android:entryValues="@array/organization_values"
     android:summary="Organización que recibirá la donación"
     android:title="Selecciona una ONG" />
 
