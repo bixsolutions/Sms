@@ -379,6 +379,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		if (id == DATE_DIALOG_ID) {
 			DatePickerDialog datePickerDialog = new DatePickerDialog(this, dPickerListener, expirationYear, expirationMonth, expirationDay);
 			datePickerDialog.getDatePicker().setMinDate(DateTime.now().getMillis() - 1000);
+      datePickerDialog.setTitle(R.string.dialog_datepicker_title);
 			return datePickerDialog;
 		}
 		else if (id == TIME_DIALOG_ID) {
