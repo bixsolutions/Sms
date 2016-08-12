@@ -8,7 +8,7 @@
   android:background="@color/white"
   android:orientation="vertical"
   android:weightSum="1"
-  tools:context=".MainActivity" >
+  tools:context=".activity.MainActivity" >
 
   <include
     layout="@layout/actionbar_main" />
