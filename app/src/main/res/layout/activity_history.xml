@@ -12,9 +12,31 @@
 
   <include layout="@layout/actionbar_main" />
 
-  <ListView
-    android:id="@+id/list_history"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" />
+  <ViewFlipper
+    android:id="@+id/view_flipper_history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+      android:id="@+id/list_history"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" />
+
+    <LinearLayout
+      android:id="@+id/list_history_empty"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:textColor="@color/gratitudeMainText"
+        android:text="@string/empty_history_message"/>
+    </LinearLayout>
+
+  </ViewFlipper>
 
 </LinearLayout>

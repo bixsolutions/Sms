@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.ViewFlipper;
 
 import com.bixlabs.smssolidario.R;
 import com.bixlabs.smssolidario.adapters.HistoryCursorAdapter;
@@ -17,6 +18,7 @@ import com.bixlabs.smssolidario.persistency.HistoryLoader;
 public class HistoryActivity extends AppCompatActivity
   implements LoaderManager.LoaderCallbacks<Cursor> {
 
+  private ViewFlipper viewFlipper;
   private ListView historyListview;
   private HistoryCursorAdapter historyAdapter;
   private DatabaseHelper databaseHelper;
@@ -33,6 +35,7 @@ public class HistoryActivity extends AppCompatActivity
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    viewFlipper = (ViewFlipper) this.findViewById(R.id.view_flipper_history);
     historyListview = (ListView) this.findViewById(R.id.list_history);
     historyAdapter = new HistoryCursorAdapter(this, null);
     historyListview.setAdapter(historyAdapter);
@@ -58,7 +61,12 @@ public class HistoryActivity extends AppCompatActivity
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    historyAdapter.swapCursor(data);
+    if (data.getCount() == 0) {
+      viewFlipper.setDisplayedChild(1);
+    } else {
+      viewFlipper.setDisplayedChild(0);
+      historyAdapter.swapCursor(data);
+    }
   }
 
   @Override
