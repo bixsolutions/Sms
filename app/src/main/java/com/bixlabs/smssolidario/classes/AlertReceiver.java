@@ -8,17 +8,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.telephony.SmsManager;
 import android.widget.Toast;
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
-import org.joda.time.DateTime;
 
 import com.bixlabs.smssolidario.R;
 import com.bixlabs.smssolidario.controllers.AlarmController;
 import com.bixlabs.smssolidario.controllers.MessageController;
+import com.bixlabs.smssolidario.persistency.HistoryDataSource;
+
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.DateTime;
 
 import static com.bixlabs.smssolidario.classes.Constants.DEFAULT_ACTIVE;
 import static com.bixlabs.smssolidario.classes.Constants.DEFAULT_ALLOWED_PREMIUM;
@@ -48,6 +48,7 @@ public class AlertReceiver extends BroadcastReceiver {
   String phoneNumber, textMessage;
   SharedPreferences.Editor editor;
   MessageController msgController;
+  HistoryDataSource historyDataSource;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -65,6 +66,8 @@ public class AlertReceiver extends BroadcastReceiver {
         // This is the case when the message is sent
 				case Activity.RESULT_OK:
           settings = PreferenceManager.getDefaultSharedPreferences(context);
+          phoneNumber = settings.getString(PREF_PHONE, DEFAULT_PHONE);
+
           boolean allowedPremium = settings.getBoolean(PREF_ALLOWED_PREMIUM, DEFAULT_ALLOWED_PREMIUM);
           // If the messages were sent successfully then we don't
           // Need to show again the validation dialog
@@ -84,6 +87,12 @@ public class AlertReceiver extends BroadcastReceiver {
           editor.putInt(PREF_SMS_TO_SEND, messagesToSend);
           editor.putBoolean(PREF_ERROR, false);
           editor.apply();
+
+          // Add the newly sent message to the History DB
+          historyDataSource = new HistoryDataSource(context);
+          historyDataSource.addToHistory(Utils.getOrganizationNameFromNumber(phoneNumber,
+            context.getResources().getStringArray(R.array.organizations)));
+
           // If the day changes we stop sending messages to prevent spending wrong credit
           DateTime actualTime = DateTime.now();
           DateTime actualExpirationDate = DateTime.now();
@@ -91,7 +100,6 @@ public class AlertReceiver extends BroadcastReceiver {
           boolean stopForChangeOfDay = actualTime.getDayOfMonth() != expirationDay;
           boolean stopForMax = messagesToSend == 0;
           if (!stopForMax && !stopForChangeOfDay) {
-            phoneNumber = settings.getString(PREF_PHONE, DEFAULT_PHONE);
             textMessage = settings.getString(PREF_MESSAGE, DEFAULT_MESSAGE);
             msgController = MessageController.getInstance();
             msgController.sendMessage(phoneNumber, textMessage, context);

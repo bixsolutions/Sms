@@ -2,14 +2,14 @@ package com.bixlabs.smssolidario.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +24,9 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.awesomego.widget.ToggleButton;
+import com.bixlabs.smssolidario.BuildConfig;
+import com.bixlabs.smssolidario.R;
+import com.bixlabs.smssolidario.SmsAnalyticsApplication;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -35,9 +38,6 @@ import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.DateTime;
 
 import io.fabric.sdk.android.Fabric;
-import com.bixlabs.smssolidario.BuildConfig;
-import com.bixlabs.smssolidario.R;
-import com.bixlabs.smssolidario.SmsAnalyticsApplication;
 
 import static com.bixlabs.smssolidario.classes.Constants.COMPANY_NAME;
 import static com.bixlabs.smssolidario.classes.Constants.DEFAULT_ACTIVE;
@@ -123,14 +123,18 @@ public class MainActivity extends AppCompatActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			checkPermissions();
-		}
-
-		if (id == R.id.action_about) {
-			showAbout();
-		}
+    switch (id) {
+      case R.id.action_settings:
+        checkPermissions();
+        break;
+      case R.id.action_about:
+        showAbout();
+        break;
+      case R.id.action_history:
+        Intent historyIntent = new Intent(this, HistoryActivity.class);
+        startActivity(historyIntent);
+        break;
+    }
 
 		return super.onOptionsItemSelected(item);
 	}

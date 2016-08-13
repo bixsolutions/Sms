@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/white"
+  android:orientation="vertical"
+  android:weightSum="1"
+  tools:context=".activity.HistoryActivity" >
+
+  <include layout="@layout/actionbar_main" />
+
+  <ListView
+    android:id="@+id/list_history"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" />
+
+</LinearLayout>

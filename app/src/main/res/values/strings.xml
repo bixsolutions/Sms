@@ -49,5 +49,6 @@
   <string name="permission_validated">Ser donante validado :)</string>
   <string name="permission_thanks">¡Gracias por ser parte!</string>
   <string name="notification_next_schedule">Próximo envío automático: </string>
+  <string name="donations_history">Historial de donaciones</string>
   <string name="dialog_datepicker_title">Selecciona una fecha</string>
 </resources>
