@@ -383,7 +383,9 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 			return datePickerDialog;
 		}
 		else if (id == TIME_DIALOG_ID) {
-			return new TimePickerDialog(this, timePickerListener, expirationHour, expirationMinute, true);
+      TimePickerDialog timePickerDialog = new TimePickerDialog(this, timePickerListener, expirationHour, expirationMinute, true);
+      timePickerDialog.setTitle(R.string.dialog_timepicker_title);
+			return timePickerDialog;
 		}
 		return null;
 	}
