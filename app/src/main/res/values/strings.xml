@@ -63,4 +63,6 @@
   <string name="preferences_notify">Notificar al enviar</string>
   <string name="preferences_organization_title">Selecciona una ONG</string>
   <string name="preferences_new_number_title">Ingresa un número de teléfono</string>
+  <string name="history_progressdialog_title">Cargando</string>
+  <string name="history_progressdialog_message">Un momento por favor...</string>
 </resources>
