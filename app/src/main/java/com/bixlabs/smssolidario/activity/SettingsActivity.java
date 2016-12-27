@@ -6,8 +6,10 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -16,7 +18,6 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.LayoutRes;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
@@ -27,8 +28,19 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bixlabs.smssolidario.R;
+import com.bixlabs.smssolidario.classes.Scheduler;
+
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.bixlabs.smssolidario.classes.Constants.DEFAULT_HOUR;
 import static com.bixlabs.smssolidario.classes.Constants.DEFAULT_MINUTES;
+import static com.bixlabs.smssolidario.classes.Constants.ORGANIZATION_INFO;
 import static com.bixlabs.smssolidario.classes.Constants.PREF_ACTIVE;
 import static com.bixlabs.smssolidario.classes.Constants.PREF_CONFIGURED;
 import static com.bixlabs.smssolidario.classes.Constants.PREF_DAY;
@@ -37,16 +49,6 @@ import static com.bixlabs.smssolidario.classes.Constants.PREF_LAST_DAY;
 import static com.bixlabs.smssolidario.classes.Constants.PREF_MINUTE;
 import static com.bixlabs.smssolidario.classes.Constants.PREF_MONTH;
 import static com.bixlabs.smssolidario.classes.Constants.PREF_YEAR;
-import static com.bixlabs.smssolidario.classes.Constants.ORGANIZATION_INFO;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
-import org.joda.time.DateTime;
-
-import com.bixlabs.smssolidario.R;
-import com.bixlabs.smssolidario.classes.Scheduler;
 
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
 				android.support.v7.widget.Toolbar.OnMenuItemClickListener{
@@ -112,6 +114,19 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		messagePreference = findPreference(MESSAGE_KEY);
 		phonePreference = findPreference(NUMBER_KEY);
 		hideMessageAndPhonePreferences();
+
+    // Load the organizations and add them to the preferences
+    ListPreference organizations = (ListPreference) findPreference(ORGANIZATION_KEY);
+    String[] orgs = getResources().getStringArray(R.array.organizations);
+    List<String> entries = new ArrayList<>();
+    List<String> values = new ArrayList<>();
+    for (String org : orgs) {
+      String[] splittedOrg = org.split("\\|", 2);
+      values.add(splittedOrg[0]);
+      entries.add(splittedOrg[1]);
+    }
+    organizations.setEntries(entries.toArray(new String[entries.size()]));
+    organizations.setEntryValues(values.toArray(new String[values.size()]));
 
 		JodaTimeAndroid.init(this);
 		getPreferencesFromUser();
@@ -364,10 +379,13 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		if (id == DATE_DIALOG_ID) {
 			DatePickerDialog datePickerDialog = new DatePickerDialog(this, dPickerListener, expirationYear, expirationMonth, expirationDay);
 			datePickerDialog.getDatePicker().setMinDate(DateTime.now().getMillis() - 1000);
+      datePickerDialog.setTitle(R.string.dialog_datepicker_title);
 			return datePickerDialog;
 		}
 		else if (id == TIME_DIALOG_ID) {
-			return new TimePickerDialog(this, timePickerListener, expirationHour, expirationMinute, true);
+      TimePickerDialog timePickerDialog = new TimePickerDialog(this, timePickerListener, expirationHour, expirationMinute, true);
+      timePickerDialog.setTitle(R.string.dialog_timepicker_title);
+			return timePickerDialog;
 		}
 		return null;
 	}

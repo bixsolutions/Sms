@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="72dp"
+              android:orientation="vertical"
+              android:paddingLeft="16dp"
+              android:paddingStart="16dp"
+              android:paddingEnd="16dp"
+              android:paddingRight="16dp"
+              android:gravity="center_vertical">
+
+  <TextView android:id="@+id/item_history_organization"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+  <TextView android:id="@+id/item_history_date"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+</LinearLayout>

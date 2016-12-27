@@ -7,9 +7,16 @@
     android:title="@string/action_settings"
     android:orderInCategory="100"
     app:showAsAction="never"/>
+
+  <item
+    android:id="@+id/action_history"
+    android:title="@string/donations_history"
+    android:orderInCategory="200"
+    app:showAsAction="never" />
+
   <item
     android:id="@+id/action_about"
     android:title="@string/about"
-    android:orderInCategory="200"
+    android:orderInCategory="300"
     app:showAsAction="never"/>
 </menu>

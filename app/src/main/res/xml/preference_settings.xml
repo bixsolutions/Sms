@@ -8,42 +8,40 @@
   <ListPreference
     android:key="Organization"
     android:defaultValue="ASH"
-    android:entries="@array/organizations"
-    android:entryValues="@array/organization_values"
-    android:summary="Organización que recibirá la donación"
-    android:title="Selecciona una ONG" />
+    android:summary="@string/preferences_organization"
+    android:title="@string/preferences_organization_title" />
 
   <EditTextPreference
     android:key="Phone"
-    android:dialogTitle="Nuevo número"
+    android:dialogTitle="@string/preferences_new_number"
     android:inputType="phone"
-    android:title="Ingresa un número de teléfono" />
+    android:title="@string/preferences_new_number_title" />
 
   <EditTextPreference
     android:key="Message"
-    android:dialogTitle="Ingrese texto"
+    android:dialogTitle="@string/preferences_message_dialog_title"
     android:inputType="text"
-    android:title="Mensaje" />
+    android:title="@string/preferences_message" />
 
   <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
     android:key="Max"
     android:defaultValue="@integer/minSms"
-    android:title="Cantidad máxima de SMS"
+    android:title="@string/preferences_max_sms_amount"
     app:vnt_maxValue="@integer/maxSms"
     app:vnt_minValue="@integer/minSms"
     app:vnt_setWrapSelectorWheel="true" />
 
   <Preference
     android:key="btnDateFilter"
-    android:title="Seleccionar fecha" />
+    android:title="@string/preferences_date" />
 
   <Preference
     android:key="btnTimeFilter"
-    android:title="Hora de envío" />
+    android:title="@string/preferences_time" />
 
   <CheckBoxPreference
     android:key="Notify"
     android:widgetLayout="@layout/switch_preference"
-    android:title="Notificar al enviar" />
+    android:title="@string/preferences_notify" />
 
 </PreferenceScreen>

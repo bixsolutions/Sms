@@ -36,6 +36,11 @@
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".activity.HistoryActivity"
+            android:label="@string/donations_history"
+            android:screenOrientation="portrait">
+        </activity>
         <receiver
           android:exported="false"
           android:name="com.bixlabs.smssolidario.classes.AlertReceiver">

@@ -49,4 +49,20 @@
   <string name="permission_validated">Ser donante validado :)</string>
   <string name="permission_thanks">¡Gracias por ser parte!</string>
   <string name="notification_next_schedule">Próximo envío automático: </string>
+  <string name="donations_history">Historial de donaciones</string>
+  <string name="dialog_datepicker_title">Selecciona una fecha</string>
+  <string name="dialog_timepicker_title">Selecciona una hora</string>
+  <string name="empty_history_message">Aún no has colaborado.\n¿Qué esperas para hacerlo?</string>
+  <string name="preferences_organization">Organización que recibirá la donación</string>
+  <string name="preferences_new_number">Nuevo número</string>
+  <string name="preferences_message">Mensaje</string>
+  <string name="preferences_message_dialog_title">Ingrese texto</string>
+  <string name="preferences_max_sms_amount">Cantidad máxima de SMS</string>
+  <string name="preferences_date">Seleccionar fecha</string>
+  <string name="preferences_time">Hora de envío</string>
+  <string name="preferences_notify">Notificar al enviar</string>
+  <string name="preferences_organization_title">Selecciona una ONG</string>
+  <string name="preferences_new_number_title">Ingresa un número de teléfono</string>
+  <string name="history_progressdialog_title">Cargando</string>
+  <string name="history_progressdialog_message">Un momento por favor...</string>
 </resources>
